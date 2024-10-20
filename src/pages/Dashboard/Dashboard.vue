@@ -2,7 +2,7 @@
 import axios from "axios";
 import Select from "primevue/select";
 
-import { onMounted, reactive, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 const selectedMonth = ref(null);
 const monthOptions = ref([
    "January",
@@ -226,7 +226,7 @@ async function renderClaimCostByDiseaseChart() {
 //  **********************************************************
 
 /**
- * # Gender Data Fetch Start
+ * # Encounter Reason By Patients Start
  */
 
 const encounterReasonByPatients = ref(null);
@@ -250,11 +250,8 @@ async function getEncounterReasonData(selMonth) {
 }
 
 async function renderEncounterReasonChart() {
-   // claimCostDiseases.value = claimCostByDiseaseData.value.slice(0, 7);
    const claimCostXValues = ref([]);
    const encounterWisePatients = ref([]);
-   // const claimCostBaseEncounterValues = ref([]);
-   // const claimCostAmountPaidValues = ref([]);
 
    for (const each of encounterReasonByPatients.value) {
       claimCostXValues.value.push(each.encounterClass);
@@ -279,11 +276,115 @@ async function renderEncounterReasonChart() {
 }
 
 /**
- * # Claim Cost By Disease End
+ * # Encounter Reason By Patients End
  */
 
 //  **********************************************************
+/**
+ * TOdo Working on it
+ */
+/**
+ * # Patients By Race Start
+ */
+const patientsByRaceData = ref(null);
+const patientsByRaceChartOptions = ref();
 
+async function getPatientsByRaceData() {
+   try {
+      const result = await axios.get(
+         `${import.meta.env.VITE_BACKEND_URL}/patients-by-race`,
+      );
+      patientsByRaceData.value = result.data;
+      console.log(patientsByRaceData.value);
+      await renderPatientsByRaceChart();
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+async function renderPatientsByRaceChart() {
+   const patientsByRaceGraphData = ref([]);
+   const whiteRacePatientsData = ref([]);
+   const XValuePatientsData = ref([]);
+   const blackRacePatientsData = ref([]);
+
+   patientsByRaceData.value.forEach((element) => {
+      if (element.patientRace === "white") {
+         whiteRacePatientsData.value.push(element.totalPatients);
+      } else if (element.patientRace === "native") {
+         whiteRacePatientsData.value.push(element.totalPatients);
+      } else if (element.patientRace === "asian") {
+         whiteRacePatientsData.value.push(element.totalPatients);
+      } else if (element.patientRace === "black") {
+         blackRacePatientsData.value.push(element.totalPatients);
+      } else if (element.patientRace === "hawaiian") {
+         whiteRacePatientsData.value.push(element.totalPatients);
+      } else {
+         whiteRacePatientsData.value.push(element.totalPatients);
+      }
+   });
+   console.log(whiteRacePatientsData._rawValue);
+
+   patientsByRaceChartOptions.value = {
+      title: {
+         text: "Stacked Line",
+      },
+      legend: {
+         data: ["White", "Black", "Video Ads", "Direct", "Search Engine"],
+      },
+      grid: {
+         left: "3%",
+         right: "4%",
+         bottom: "3%",
+         containLabel: true,
+      },
+
+      xAxis: {
+         type: "category",
+         boundaryGap: false,
+         data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      },
+      yAxis: {
+         type: "value",
+      },
+      series: [
+         {
+            name: "White",
+            type: "line",
+            stack: "Total",
+            data: whiteRacePatientsData,
+         },
+         {
+            name: "Black",
+            type: "line",
+            stack: "Total",
+            data: blackRacePatientsData,
+         },
+         {
+            name: "Video Ads",
+            type: "line",
+            stack: "Total",
+            data: [150, 232, 201, 154, 190, 330, 410],
+         },
+         {
+            name: "Direct",
+            type: "line",
+            stack: "Total",
+            data: [320, 332, 301, 334, 390, 330, 320],
+         },
+         {
+            name: "Search Engine",
+            type: "line",
+            stack: "Total",
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+         },
+      ],
+   };
+}
+
+/**
+ * # Patients By Race End
+ */
 watch(selectedMonth, async (newValue, oldValue) => {
    await getAppointmentData(newValue);
    await getGenderByMarriedStatus(newValue);
@@ -296,6 +397,7 @@ onMounted(async () => {
    await getGenderByMarriedStatus();
    await getClaimCostByDisease();
    await getEncounterReasonData();
+   await getPatientsByRaceData();
 });
 </script>
 
@@ -310,9 +412,9 @@ onMounted(async () => {
       <div class="tw-my-5">
          <!-- # KPI Section -->
          <div
-            class="tw-flex tw-flex-col tw-items-center tw-justify-around md:tw-flex-row">
+            class="tw-flex tw-gap-3 tw-flex-col tw-items-center tw-justify-around md:tw-flex-row">
             <div
-               class="tw-flex tw-w-1/5 tw-flex-col tw-items-center tw-justify-center tw-gap-2 tw-rounded tw-bg-white tw-p-5 tw-font-semibold">
+               class="tw-flex tw-w-full md:tw-w-1/5 tw-flex-col tw-items-center tw-justify-center tw-gap-2 tw-rounded tw-bg-white tw-p-5 tw-font-semibold">
                <img src="/assets/icons/appointment.svg" alt="" />
                <span class="tw-text-lg">Appointments</span>
                <span class="tw-text-2xl tw-font-semibold tw-text-[#fb8cb1]">
@@ -320,7 +422,7 @@ onMounted(async () => {
                </span>
             </div>
             <div
-               class="tw-flex tw-w-1/5 tw-flex-col tw-items-center tw-justify-center tw-gap-2 tw-rounded tw-bg-white tw-p-5 tw-font-semibold">
+               class="tw-flex tw-w-full md:tw-w-1/5 tw-flex-col tw-items-center tw-justify-center tw-gap-2 tw-rounded tw-bg-white tw-p-5 tw-font-semibold">
                <img src="/assets/icons/decrease.svg" alt="" />
                <span class="tw-text-lg">Death Rate</span>
                <span class="tw-text-2xl tw-font-semibold tw-text-[#c19dde]">
@@ -328,7 +430,7 @@ onMounted(async () => {
                </span>
             </div>
             <div
-               class="tw-flex tw-w-1/5 tw-flex-col tw-items-center tw-justify-center tw-gap-2 tw-rounded tw-bg-white tw-p-5 tw-font-semibold">
+               class="tw-flex tw-w-full md:tw-w-1/5 tw-flex-col tw-items-center tw-justify-center tw-gap-2 tw-rounded tw-bg-white tw-p-5 tw-font-semibold">
                <img src="/assets/icons/registered.svg" alt="" />
                <span class="tw-text-lg">Registered Patients</span>
                <span class="tw-text-2xl tw-font-semibold tw-text-[#2bcbb5]">
@@ -336,7 +438,7 @@ onMounted(async () => {
                </span>
             </div>
             <div
-               class="tw-flex tw-w-1/5 tw-flex-col tw-items-center tw-justify-center tw-gap-2 tw-rounded tw-bg-white tw-p-5 tw-font-semibold">
+               class="tw-flex tw-w-full md:tw-w-1/5 tw-flex-col tw-items-center tw-justify-center tw-gap-2 tw-rounded tw-bg-white tw-p-5 tw-font-semibold">
                <img src="/assets/icons/emergency.svg" alt="" />
                <span class="tw-text-lg">Emergency</span>
                <span class="tw-text-2xl tw-font-semibold tw-text-[#f24822]">
@@ -345,22 +447,45 @@ onMounted(async () => {
             </div>
          </div>
 
-         <div class="tw-flex tw-items-center tw-justify-between">
+         <div
+            class="tw-my-5 tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-center xl:tw-justify-between">
             <!--# Gender Wise Patients pie-chart -->
-            <div class="tw-h-[500px] tw-w-[500px]">
-               <v-chart :option="genderByMarriedStatusChartOptions"></v-chart>
+            <div>
+               <div class="tw-text-xl tw-font-bold xl:tw-text-2xl">
+                  Gender By Maritial Status Wise Patients
+               </div>
+               <div class="tw-h-[400px] lg:tw-h-[500px] lg:tw-w-[500px]">
+                  <v-chart
+                     :option="genderByMarriedStatusChartOptions"></v-chart>
+               </div>
             </div>
-            <!-- # Encounter Class Bar Chart -->
-            <div class="tw-h-[500px] tw-w-[800px]">
-               <v-chart
-                  :option="encounterReasonByPatientsChartOptions"></v-chart>
-            </div>
-         </div>
 
-         <!-- # Claim Cost Bar Chart -->
-         <div class="tw-h-[700px] tw-w-[1000px]">
-            <v-chart :option="claimCostByDiseaseChartOptions"></v-chart>
+            <!-- # Encounter Class Bar Chart -->
+            <div>
+               <span class="tw-text-xl tw-font-bold xl:tw-text-2xl">
+                  Encounter Reason Of Patients
+               </span>
+               <div class="tw-h-[400px] lg:tw-h-[500px] lg:tw-w-[800px]">
+                  <v-chart
+                     :option="encounterReasonByPatientsChartOptions"></v-chart>
+               </div>
+            </div>
          </div>
+         <!-- # Claim Cost Bar Chart -->
+         <div>
+            <span class="tw-text-xl tw-font-bold xl:tw-text-2xl">
+               Total Claim Cost
+            </span>
+
+            <div class="tw-h-[400px] lg:tw-h-[700px] lg:tw-w-[1000px]">
+               <v-chart :option="claimCostByDiseaseChartOptions"></v-chart>
+            </div>
+         </div>
+         <!-- ! Working on it -->
+         <!-- # Patients By Race Bar Chart
+         <div class="tw-h-[700px] tw-w-[1000px]">
+            <v-chart :option="patientsByRaceChartOptions"></v-chart>
+         </div> -->
       </div>
    </div>
 </template>

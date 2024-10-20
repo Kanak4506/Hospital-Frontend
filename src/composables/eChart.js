@@ -1,6 +1,6 @@
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { PieChart, BarChart } from "echarts/charts";
+import { PieChart, BarChart, LineChart } from "echarts/charts";
 import {
    TitleComponent,
    TooltipComponent,
@@ -15,6 +15,7 @@ export function setUpEcharts() {
       LegendComponent,
       PieChart,
       GridComponent,
+      LineChart,
       BarChart,
       CanvasRenderer,
    ]);
