@@ -1,0 +1,1 @@
+import{af as o,c as s,o as a}from"./index-B_n-HmOD.js";const r={__name:"test",setup(n){return(t,e)=>(a(),s("div",{onClick:e[0]||(e[0]=c=>t.toggleDarkMode())},"hi"))}},p=o(r,[["__scopeId","data-v-c5f4b82e"]]);export{p as default};

@@ -11,9 +11,12 @@ import Aura from "@primevue/themes/aura";
 
 const app = createApp(App);
 
+
+// ECharts Setup
 import { setUpEcharts } from "./composables/eChart";
 import VChart from "vue-echarts";
 
+// register ECharts globally
 setUpEcharts();
 app.component("v-chart", VChart);
 
@@ -29,8 +32,11 @@ app.use(router)
    )
    .use(PrimeVue, {
       theme: {
-         preset: Aura,
-      },
+          preset: Aura,
+          options: {
+              darkModeSelector: '.my-app-dark',
+          }
+      }
    })
    .mount("#app");
 app.use(createPinia());
