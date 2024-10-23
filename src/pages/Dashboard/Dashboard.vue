@@ -75,9 +75,6 @@ async function renderPatientsByRaceChart() {
 
    // set chart options
    patientsByRaceChartOptions.value = {
-      title: {
-         text: "Stacked Line",
-      },
       tooltip: {
          trigger: "axis",
       },
@@ -169,7 +166,7 @@ onMounted(async () => {
          class="tw-text-xl tw-font-semibold tw-text-[#f5b047] lg:tw-text-3xl">
          Registered Patients By Race Month Wise
       </span>
-      <div class="tw-mx-10 tw-h-[600px] tw-w-[1000px]">
+      <div class="tw-mx-10 tw-h-[400px] lg:tw-h-[600px] lg:tw-w-[1000px]">
          <v-chart :option="patientsByRaceChartOptions"></v-chart>
       </div>
    </div>

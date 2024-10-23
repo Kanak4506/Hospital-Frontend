@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import axios from "axios";
-import InputText from "primevue/inputtext";
 import FloatLabel from "primevue/floatlabel";
 import Select from "primevue/select";
 
@@ -53,10 +52,10 @@ await patientData()
          </FloatLabel>
       </div>
       <div v-if="isLoading" class="tw-border-8 tw-p-5">
-         <div class="tw-flex tw-gap-10">
+         <div class="tw-flex tw-gap-2 sm:tw-gap-10">
             <!-- # Main Details -->
             <div
-               class="tw-flex tw-w-64 tw-flex-col tw-items-center tw-gap-2 tw-border tw-p-4">
+               class="tw-flex tw-w-64 tw-h-fit tw-flex-col tw-items-center tw-gap-2 tw-border tw-p-4">
                <div>
                   <img
                      class="tw-h-36"
@@ -117,7 +116,7 @@ await patientData()
                      PERSONAL DETAILS
                   </span>
 
-                  <div class="tw-mt-3 tw-flex tw-gap-20">
+                  <div class="tw-mt-3 tw-flex sm:tw-flex-row tw-flex-col sm:tw-gap-20">
                      <div class="tw-flex tw-flex-col">
                         <span class="tw-font-semibold tw-text-gray-400">
                            Last Name
@@ -138,7 +137,7 @@ await patientData()
                      </div>
                   </div>
 
-                  <div class="tw-my-5 tw-flex tw-gap-20">
+                  <div class="sm:tw-my-5 tw-flex tw-flex-wrap sm:tw-flex-row tw-flex-col sm:tw-gap-20">
                      <div class="tw-flex tw-flex-col">
                         <span class="tw-font-semibold tw-text-gray-400">
                            Marital Status
@@ -154,11 +153,11 @@ await patientData()
                   </div>
                </div>
                <!-- # Home Town Details -->
-               <div>
+               <div class="tw-my-5">
                   <span class="tw-text-lg tw-font-semibold tw-text-slate-600">
                      Home Town Details
                   </span>
-                  <div class="tw-mb-5 tw-mt-3 tw-flex tw-gap-20">
+                  <div class="tw-mb-5 tw-mt-3 tw-flex sm:tw-flex-row tw-flex-col sm:tw-gap-20">
                      <div class="tw-flex tw-flex-col">
                         <span class="tw-font-semibold tw-text-gray-400">
                            Address
@@ -185,7 +184,7 @@ await patientData()
                   <span class="tw-text-lg tw-font-semibold tw-text-slate-600">
                      Cultural Background
                   </span>
-                  <div class="tw-mt-3 tw-flex tw-gap-20">
+                  <div class="tw-mt-3 tw-flex sm:tw-flex-row tw-flex-col sm:tw-gap-20">
                      <div class="tw-flex tw-flex-col">
                         <span class="tw-font-semibold tw-text-gray-400">
                            Address

@@ -1,0 +1,1 @@
+import{_ as s,b as t,o as c,p as o,j as a,e as _}from"./index-B0pGiWZ1.js";const d={},n=e=>(o("data-v-9e6c8202"),e=e(),a(),e),r={class:"tw-w-screen tw-h-[80vh] tw-flex tw-items-center tw-justify-center"},p=n(()=>_("div",{class:"lds-hourglass"},null,-1)),i=[p];function l(e,h){return c(),t("div",r,i)}const u=s(d,[["render",l],["__scopeId","data-v-9e6c8202"]]);export{u as default};
