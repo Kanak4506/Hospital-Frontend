@@ -2,12 +2,13 @@
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
+//*************************************************** */
 
 /**
  * # Patients By Race Start
  */
 const patientsByRaceData = ref(null);
-const patientsByRaceChartOptions = ref();
+const patientsByRaceChartOptions = ref()
 
 // fetching Patients data
 async function getPatientsByRaceData() {
