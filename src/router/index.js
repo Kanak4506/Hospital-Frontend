@@ -48,7 +48,7 @@ router.beforeResolve(async (to, from, next) => {
 
    if (to.meta.requiresAuth && !isAuthenticated.value) {
       console.log("User is not authenticated. Redirecting to login...");
-      next({ name: "logIn" });
+      next();
    } else {
       next();
    }
