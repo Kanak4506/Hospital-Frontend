@@ -7,7 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-change 10
 # Node modules
 node_modules/
 frontend/node_modules/
