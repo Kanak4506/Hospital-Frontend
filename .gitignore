@@ -33,7 +33,7 @@ backend/dist/
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
+*.sln  
 *.sw?  
             
       
